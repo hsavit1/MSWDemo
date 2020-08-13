@@ -6,7 +6,7 @@ import {
   Text,
   StatusBar,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 
 import {
@@ -16,8 +16,12 @@ import {
   gql,
   useQuery,
   ApolloLink,
-  HttpLink
+  HttpLink,
 } from '@apollo/client';
+
+import fetch from 'node-fetch';
+
+// import server from "./server.js"
 
 const GET_CHARACTERS = gql`
   query getCharacters {
@@ -30,29 +34,22 @@ const GET_CHARACTERS = gql`
   }
 `;
 
-// Create the client as outlined in the setup guide
 const client = new ApolloClient({
   link: ApolloLink.from([
-    // onError((error) => {
-    //     const { graphQLErrors, networkError, operation } = error
-    //     if (operation)
-    //         console.log({ errorFromQueryName: operation.operationName })
-    //     if (graphQLErrors) console.log({ graphQLErrors })
-    //     if (networkError) console.log(`[Network error]: ${networkError}`)
-    // }),
     new HttpLink({
-        uri: 'https://rickandmortyapi.com/graphql/',
-        credentials: "same-origin",
-        fetch: (...args) => {
-            return fetch(...args)
-        }
-    })
-]),
+      // uri: 'https://rickandmortyapi.com/graphql/', // uncomment this to see working example
+      uri: 'http://localhost:3000/graphql',
+      credentials: 'same-origin',
+      fetch: (...args) => {
+        return fetch(...args);
+      },
+    }),
+  ]),
 
   cache: new InMemoryCache(),
 });
 
-const App = () => (
+export const App = () => (
   <ApolloProvider client={client}>
     <MyRootComponent />
   </ApolloProvider>
@@ -67,11 +64,10 @@ const Item = ({title}) => (
 const MyRootComponent = () => {
   const {data, loading, error} = useQuery(GET_CHARACTERS);
 
-  let DATA = data?.characters?.results;
+  const DATA = data?.characters?.results;
 
-  const renderItem = ({ item }) => {
-    console.log({item});
-    return (<Item title={item.name}/>)
+  const renderItem = ({item}) => {
+    return <Item title={item.name} />;
   };
 
   return (
@@ -80,12 +76,13 @@ const MyRootComponent = () => {
       <SafeAreaView style={styles.container}>
         <Text style={styles.sectionTitle}>Rick and morty MSW demo</Text>
 
-        {loading && <ActivityIndicator loading={loading} />}
+        {loading && <ActivityIndicator testID="loading" />}
 
-        {error && <Text>ERROR FETCHING</Text>}
+        {error && <Text testID="error">{`${error}`}</Text>}
 
-        {!loading && !error && DATA.length > 0 && (
+        {!loading && !error && DATA?.length > 0 && (
           <FlatList
+            testID="list"
             data={DATA}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
@@ -100,13 +97,13 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',
-    color: "black",
-    marginBottom: 40
+    color: 'black',
+    marginBottom: 40,
   },
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
-    backgroundColor: "white"
+    backgroundColor: 'white',
   },
   item: {
     backgroundColor: '#f9c2ff',
