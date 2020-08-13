@@ -25,7 +25,6 @@ const GET_CHARACTERS = gql`
       results {
         id
         name
-        image
       }
     }
   }
