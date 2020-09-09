@@ -25,7 +25,8 @@
     "eslint": "^7.6.0",
     "jest": "^26.4.0",
     "metro-react-native-babel-preset": "^0.62.0",
-    "msw": "^0.20.5",
+    "msw": "github:mswjs/msw#master",
+    "node-request-interceptor": "0.5.1",
     "react-test-renderer": "16.13.1"
   },
   "jest": {

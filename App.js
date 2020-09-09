@@ -21,7 +21,7 @@ import {
 
 import fetch from 'node-fetch';
 
-// import server from "./server.js"
+// import server from "./server.js" // comment this out 
 
 const GET_CHARACTERS = gql`
   query getCharacters {

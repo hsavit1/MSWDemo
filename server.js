@@ -5,7 +5,6 @@ import {setupServer} from 'msw/native';
 let mswSetupServer = setupServer;
 
 if (process.env.NODE_ENV === 'test') {
-  let {setupServer} = require('msw/node');
   mswSetupServer = setupServer;
 }
 
