@@ -10,16 +10,12 @@ import {
 } from 'react-native';
 
 import {
-  ApolloClient,
-  InMemoryCache,
   ApolloProvider,
   gql,
   useQuery,
-  ApolloLink,
-  HttpLink,
 } from '@apollo/client';
 
-import fetch from 'node-fetch';
+import client from './client.js'
 
 // import server from "./server.js" // comment this out 
 
@@ -34,21 +30,6 @@ const GET_CHARACTERS = gql`
   }
 `;
 
-const client = new ApolloClient({
-  link: ApolloLink.from([
-    new HttpLink({
-      // uri: 'https://rickandmortyapi.com/graphql/', // uncomment this to see working example
-      uri: 'http://localhost:3000/graphql',
-      credentials: 'same-origin',
-      fetch: (...args) => {
-        return fetch(...args);
-      },
-    }),
-  ]),
-
-  cache: new InMemoryCache(),
-});
-
 export const App = () => (
   <ApolloProvider client={client}>
     <MyRootComponent />
@@ -61,7 +42,7 @@ const Item = ({title}) => (
   </View>
 );
 
-const MyRootComponent = () => {
+export const MyRootComponent = () => {
   const {data, loading, error} = useQuery(GET_CHARACTERS);
 
   const DATA = data?.characters?.results;

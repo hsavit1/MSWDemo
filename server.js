@@ -1,12 +1,5 @@
-// import {handlers} from "./handlers"
 import {graphql} from 'msw';
 import {setupServer} from 'msw/native';
-
-let mswSetupServer = setupServer;
-
-if (process.env.NODE_ENV === 'test') {
-  mswSetupServer = setupServer;
-}
 
 const query = graphql.query('getCharacters', (req, res, ctx) => {
   return res(
@@ -44,5 +37,5 @@ const query = graphql.query('getCharacters', (req, res, ctx) => {
   );
 });
 
-const server = mswSetupServer(query);
+const server = setupServer(query);
 export default server;
