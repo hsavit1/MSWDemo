@@ -10,11 +10,12 @@ yarn # install deps
 react-native run-ios
 ```
 
-this will only work right now if you uncomment https://rickandmortyapi.com/graphql/ in the App.js
+This will hit the mocked server to get mocked results from the rick and morty API. 
 
 ### Tests
 
-you can run the test suite with `npm run test`
+- you can run the test suite with `npm run test`
+- 
 
 
 **WIP**
