@@ -16,7 +16,8 @@ import fetch from 'node-fetch';
 
 let uri = 'https://rickandmortyapi.com/graphql/';
 if (process.env.NODE_ENV === 'test') {
-  uri = 'http://localhost:4000/graphql';
+  console.log({env: process.env.NODE_ENV})
+  uri = 'http://localhost:3000/graphql/';
 }
 
 const link = from([

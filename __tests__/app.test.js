@@ -1,7 +1,6 @@
 import React from "react"
 import {render, fireEvent, waitFor, waitForElementToBeRemoved} from '@testing-library/react-native';
-import {App, MyRootComponent} from '../App';
-import server from '../server';
+import {App, MyRootComponent, server} from '../App';
 import client from '../client'
 import { ApolloProvider } from "@apollo/client";
 
@@ -29,5 +28,6 @@ test('shows mocked results', async () => {
   await waitForElementToBeRemoved(() => getByTestId('loading'));
 
   debug()
-  await waitFor(() => getByText('Jane').toBeTruthy());
+  
+  await waitFor(() => getByText('Rick').toBeTruthy());
 });
