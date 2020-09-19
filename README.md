@@ -15,9 +15,3 @@ This will hit the mocked server to get mocked results from the rick and morty AP
 ### Tests
 
 - you can run the test suite with `npm run test`
-- 
-
-
-**WIP**
-
-Currently, this works when uncommenting https://rickandmortyapi.com/graphql/ . however, if im not mistaken, this should work against the mocked server even without the rickandmortyapi. I believe that there is a bug with MSW.
