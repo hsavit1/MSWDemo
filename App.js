@@ -9,6 +9,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
+import {Header} from "react-native/Libraries/NewAppScreen"
+
 import {
   ApolloProvider,
   gql,
@@ -19,7 +21,7 @@ import client from './client.js'
 import server from './server.js';
 
 if(process.env.NODE_ENV === "development") {
-  require('react-native-erverurl-polyfill/auto');
+  require('react-native-url-polyfill/auto');
   server.listen(); // comment this line to see real API results
 }
 
@@ -60,6 +62,8 @@ export const MyRootComponent = () => {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
         <Text style={styles.sectionTitle}>Rick and morty MSW demo</Text>
+
+<Header />
 
         {loading && <ActivityIndicator testID="loading" />}
 

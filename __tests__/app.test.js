@@ -1,7 +1,7 @@
 import React from "react"
 import {render, fireEvent, waitFor, waitForElementToBeRemoved} from '@testing-library/react-native';
 import {App, MyRootComponent} from '../App';
-import server from "../server"
+import server from "../test_server"
 import client from '../client'
 import { ApolloProvider } from "@apollo/client";
 
